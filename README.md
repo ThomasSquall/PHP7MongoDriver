@@ -34,7 +34,8 @@ Once defined you need to instantiate a new Adapter:
 use MongoDriver\Adapter;
 
 // Enstablish a connection.
-$adapter = new Adapter(CONNECTION_STRING);
+$adapter = new Adapter();
+$adapter->connect(CONNECTION_STRING);
 ```
 
 At this point you want to select a Database where do your query:
