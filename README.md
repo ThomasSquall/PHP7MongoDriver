@@ -1,4 +1,4 @@
-##MongoDriver for PHP7
+## MongoDriver for PHP7
 
 With the advent of PHP7 the old mongodb driver is no more supported.
 
@@ -6,7 +6,7 @@ The new driver available is a little bit low-level compared to the previous one 
 
 This is what this library was conceived for.
 
-###Prerequisites
+### Prerequisites
 
 Before using this library you should make sure to have installed PHP7.0 or major and MongoDb driver from pecl.
 
@@ -16,7 +16,7 @@ For those using a Linux Debian distribution just run:
 $ sudo pecl install mongodb
 ```
 
-###Usage
+### Usage
 
 At first you need to define a connection string.
 
