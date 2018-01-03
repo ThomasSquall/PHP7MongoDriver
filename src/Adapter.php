@@ -35,9 +35,10 @@ class Adapter
      * Finds the items in the collection matching the filters.
      * @param string $collection
      * @param \MongoDriver\Filter[]|\MongoDriver\Filter $filters
+     * @param array $options
      * @return array
      */
-    public function find($collection, $filters = [])
+    public function find($collection, $filters = [], $options = [])
     {
         if (is_a($filters, '\MongoDriver\Filter')) $filters = [$filters];
 
@@ -51,7 +52,7 @@ class Adapter
             $filtersArray[$key] = $filter[$key];
         }
 
-        $query = new Query($filtersArray, []);
+        $query = new Query($filtersArray, $options);
         $rows = $this->db->executeQuery("$this->dbName.$collection", $query);
 
         $result = [];
@@ -59,6 +60,20 @@ class Adapter
         foreach ($rows as $row) $result[] = $row;
 
         return $result;
+    }
+
+    /**
+     * Finds the first item in the collection matching the filters.
+     * @param string $collection
+     * @param \MongoDriver\Filter[]|\MongoDriver\Filter $filters
+     * @param array $options
+     * @return array
+     */
+    public function findOne($collection, $filters = [], $options = [])
+    {
+        $options['limit'] = 1;
+
+        return $this->find($collection, $filters, $options);
     }
 
     /**
