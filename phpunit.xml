@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit>
+    <testsuites
+            bootstrap="./vendor/autoload.php"
+            color="blue"
+            convertErrorsToExceptions="true"
+            convertNoticesToExceptions="true"
+            convertWarningsToExceptions="true"
+            stopOnFailures="false"
+    >
+        <testsuite name="PHP7 MongoDb Adapter tests">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

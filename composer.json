@@ -1,0 +1,19 @@
+{
+  "name": "ThomasSquall/mongo-driver",
+  "description": "PHP7 Driver for MongoDb",
+  "minimum-stability": "alpha",
+  "license": "MIT",
+  "authors": [
+    {
+        "name": "Thomas Cocchiara",
+        "email": "thomas.cocchiara@gmail.com"
+    }
+  ],
+  "type": "composer-plungin",
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
+  }
+}
