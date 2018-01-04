@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": "^7.0",
+        "ext-mongodb": "*",
         "thomas-squall/php-magic-annotations": "dev-master"
     },
     "require-dev": {
