@@ -77,11 +77,11 @@ class Adapter
     }
 
     /**
-     * Creates an item.
+     * Inserts an item.
      * @param string $collection
      * @param array $item
      */
-    public function create($collection, $item)
+    public function insert($collection, $item)
     {
         $bulk = new BulkWrite(['ordered'=>TRUE]);
         $bulk->insert($item);

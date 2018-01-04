@@ -10,7 +10,7 @@ This is what this library was conceived for.
 
 Before using this library you should make sure to have installed PHP7.0 or major and MongoDb driver from pecl.
 
-For those using a Linux Debian distribution just run:
+For those using a Linux distribution (make sure to have pecl installed) just run:
 
 ```
 $ sudo pecl install mongodb
