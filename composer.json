@@ -1,5 +1,5 @@
 {
-    "name": "ThomasSquall/mongo-driver",
+    "name": "ThomasSquall/PHP7MongoDriver",
     "description": "PHP7 Driver for MongoDb",
     "minimum-stability": "alpha",
     "license": "MIT",
