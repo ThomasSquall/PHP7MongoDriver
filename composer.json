@@ -9,7 +9,6 @@
             "email": "thomas.cocchiara@gmail.com"
         }
     ],
-    "type": "composer-plungin",
     "repositories": {
         "php-annotations": {
             "url": "https://github.com/ThomasSquall/PHPMagicAnnotations",
