@@ -10,12 +10,12 @@
     }
   ],
   "type": "composer-plungin",
-  "repositories": [
-    {
+  "repositories": {
+    "php-annotations": {
       "url": "https://github.com/ThomasSquall/PHPMagicAnnotations",
       "type": "git"
     }
-  ],
+  },
   "require": {
     "php": "^7.0",
     "ThomasSquall/PHPMagicAnnotations": "dev-master"
