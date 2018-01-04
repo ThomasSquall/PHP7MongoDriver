@@ -2,6 +2,8 @@
 
 namespace MongoDriver;
 
+include_once "Result.php";
+
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 use MongoDB\Driver\BulkWrite;
@@ -36,7 +38,7 @@ class Adapter
      * @param string $collection
      * @param \MongoDriver\Filter[]|\MongoDriver\Filter $filters
      * @param array $options
-     * @return array
+     * @return Result
      */
     public function find($collection, $filters = [], $options = [])
     {
@@ -59,7 +61,7 @@ class Adapter
 
         foreach ($rows as $row) $result[] = $row;
 
-        return $result;
+        return new Result($result);
     }
 
     /**
@@ -67,7 +69,7 @@ class Adapter
      * @param string $collection
      * @param \MongoDriver\Filter[]|\MongoDriver\Filter $filters
      * @param array $options
-     * @return array
+     * @return Result
      */
     public function findOne($collection, $filters = [], $options = [])
     {
@@ -81,10 +83,20 @@ class Adapter
      * @param string $collection
      * @param array $item
      */
-    public function insert($collection, $item)
+    public function insert($collection, $item) { $this->bulkInsert($collection, [$item]); }
+
+    /**
+     * Inserts an array of items.
+     * @param string $collection
+     * @param array $items
+     */
+    public function bulkInsert($collection, $items)
     {
+        if (!is_array($items) || count($items) == 0) return;
+
         $bulk = new BulkWrite(['ordered'=>TRUE]);
-        $bulk->insert($item);
+
+        foreach ($items as $item) $bulk->insert($item);
 
         $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
     }
