@@ -2,7 +2,7 @@
 
 namespace MongoDriver\Models\Attributes\Types;
 
-use \PHPAnnotations\Annotations\TC_Annotation;
+use PHPAnnotations\Annotations\TC_Annotation;
 
 class StringAnnotation extends TC_Annotation
 {
@@ -15,7 +15,7 @@ class StringAnnotation extends TC_Annotation
     public function __construct($name = '') { $this->name = $name; }
 
     /**
-     * __get magic method used to retrieve the attribute name.
+     * __get magic method used to retrieve the field name.
      * @param $param
      * @return null
      */
