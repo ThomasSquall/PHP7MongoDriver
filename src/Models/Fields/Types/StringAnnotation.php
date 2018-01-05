@@ -1,6 +1,6 @@
 <?php
 
-namespace MongoDriver\Models\Attributes\Types;
+namespace MongoDriver\Models\Fields\Types;
 
 use PHPAnnotations\Annotations\TC_Annotation;
 

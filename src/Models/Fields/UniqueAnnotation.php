@@ -1,6 +1,6 @@
 <?php
 
-namespace MongoDriver\Fields;
+namespace MongoDriver\Models\Fields;
 
 class UniqueAnnotation
 {
