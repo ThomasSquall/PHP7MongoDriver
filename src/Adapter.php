@@ -61,7 +61,7 @@ class Adapter
 
         foreach ($rows as $row) $result[] = $row;
 
-        return new Result($result);
+        return new Result($result, $this->dbName, $collection, $this);
     }
 
     /**
@@ -81,7 +81,7 @@ class Adapter
     /**
      * Inserts an item.
      * @param string $collection
-     * @param array $item
+     * @param array|object $item
      */
     public function insert($collection, $item) { $this->bulkInsert($collection, [$item]); }
 
