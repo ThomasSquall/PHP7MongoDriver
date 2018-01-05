@@ -2,9 +2,7 @@
 
 namespace MongoDriver\Models;
 
-use PHPAnnotations\Annotations\TC_Annotation;
-
-class ModelAnnotation extends TC_Annotation
+class ModelAnnotation extends AnnotationBase
 {
     private $name;
 
@@ -14,20 +12,5 @@ class ModelAnnotation extends TC_Annotation
      */
     public function __construct($name = '') { $this->name = $name; }
 
-    /**
-     * __get magic method used to retrieve the model name.
-     * @param $param
-     * @return null
-     */
-    public function __get($param)
-    {
-        $result = null;
-        $method = 'get' . ucfirst($param);
-
-        if (method_exists($this, $method)) $result = $this->$method();
-
-        return $result;
-    }
-
-    private function getName() { return $this->name; }
+    protected function getName() { return $this->name; }
 }

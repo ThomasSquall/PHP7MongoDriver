@@ -2,9 +2,9 @@
 
 namespace MongoDriver\Models\Fields;
 
-use PHPAnnotations\Annotations\TC_Annotation;
+use MongoDriver\Models\AnnotationBase;
 
-class RefAnnotation extends TC_Annotation
+class RefAnnotation extends AnnotationBase
 {
     private $model = '';
     private $field = '';
@@ -20,21 +20,6 @@ class RefAnnotation extends TC_Annotation
         $this->field = $field;
     }
 
-    /**
-     * __get magic method used to retrieve the name.
-     * @param $param
-     * @return null
-     */
-    public function __get($param)
-    {
-        $result = null;
-        $method = 'get' . ucfirst($param);
-
-        if (method_exists($this, $method)) $result = $this->$method();
-
-        return $result;
-    }
-
-    private function getModel() { return $this->model; }
-    private function getField() { return $this->field; }
+    protected function getModel() { return $this->model; }
+    protected function getField() { return $this->field; }
 }

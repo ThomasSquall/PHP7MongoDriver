@@ -2,7 +2,6 @@
 
 namespace MongoDriver;
 
-use PHPAnnotations\Annotations\TC_Annotation;
 use PHPAnnotations\Reflection\TC_Reflector;
 
 class Result implements \IteratorAggregate

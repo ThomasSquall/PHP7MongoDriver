@@ -11,16 +11,17 @@ final class Configs
     /**
      * Registers a class as a model handler.
      * @param string $db
-     * @param string $collection
      * @param object $model
      * @throws \Exception
      */
-    public static function registerModel($db, $collection, $model)
+    public static function registerModel($db, $model)
     {
         $classReflector = (new TC_Reflector($model))->getClass();
 
-        if (!$classReflector->hasAnnotation('\MongoDriver\Models\ModelAnnotation'))
+        if (!$classReflector->hasAnnotation('\MongoDriver\Models\Model'))
             throw new \Exception("No Model annotation found in class " . get_class($model));
+
+        $collection = $classReflector->getAnnotation('\MongoDriver\Models\Model')->name;
 
         if (!isset(self::$models[$db])) self::$models[$db] = [];
 
