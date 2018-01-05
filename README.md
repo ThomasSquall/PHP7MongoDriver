@@ -10,12 +10,11 @@ This is what this library was conceived for.
 https://github.com/ThomasSquall/PHP7MongoDriver/wiki
 
 ### Installation
+
 Using composer is quite simple, just run the following command:
 ```
 $ composer install thomas-squall/php7-mongo-driver
 ```
-
-
 
 ### Prerequisites
 
