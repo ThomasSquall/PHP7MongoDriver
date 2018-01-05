@@ -22,12 +22,12 @@ Before using this library you should make sure to have installed PHP7.0 or major
 
 For those using a Linux distribution (make sure to have pecl installed) just run:
 
-```
+``` sh
 $ sudo pecl install mongodb
 ```
 
 After that you should put the following string
-```
+``` sh
 extension=mongodb.so
 ```
 Inside your php.ini
@@ -46,7 +46,7 @@ For more information see the link: https://docs.mongodb.com/manual/reference/con
 
 Once defined you need to instantiate a new Adapter:
 
-```
+``` php
 use MongoDriver\Adapter;
 
 // Enstablish a connection.
@@ -56,19 +56,19 @@ $adapter->connect(CONNECTION_STRING);
 
 At this point you want to select a Database where do your query:
 
-```
+``` php
 $adapter->selectDB('myDatabase');
 ```
 NOTE: you could select a database directly on the constructor passing the database name as the 2nd parameter.
 
 Once selected the database we can simply query for the collection we want:
 
-```
+``` php
 $items = $adapter->find('myCollection');
 ```
 
 You can also filter your query:
-```
+``` php
 use MongDriver\Filter;
 
 $filters =
