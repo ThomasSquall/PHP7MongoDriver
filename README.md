@@ -6,6 +6,17 @@ The new driver available is a little bit low-level compared to the previous one 
 
 This is what this library was conceived for.
 
+**!!! FOR DETAILED GUIDELINES CONSULT THE WIKI AT:**
+https://github.com/ThomasSquall/PHP7MongoDriver/wiki
+
+### Installation
+Using composer is quite simple, just run the following command:
+```
+$ composer install thomas-squall/php7-mongo-driver
+```
+
+
+
 ### Prerequisites
 
 Before using this library you should make sure to have installed PHP7.0 or major and MongoDb driver from pecl.
@@ -15,6 +26,12 @@ For those using a Linux distribution (make sure to have pecl installed) just run
 ```
 $ sudo pecl install mongodb
 ```
+
+After that you should put the following string
+```
+extension=mongodb.so
+```
+Inside your php.ini
 
 ### Usage
 
