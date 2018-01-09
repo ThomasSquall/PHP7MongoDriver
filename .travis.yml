@@ -6,7 +6,6 @@ before_install:
   - sudo apt-get update
   - pecl install mongodb
   - echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - php ~/.phpenv/versions/$(phpenv version-name)/bin/composer.phar self-update
 before_script:
   - composer install
 script: phpunit -- configuration phpunit.xml --coverage-text
