@@ -5,20 +5,16 @@ use MongoDriver\Filter;
 
 class AdapterTest extends \PHPUnit\Framework\TestCase
 {
-    private $connection='mongodb://localhost:27017';
-    private $db='mongo_driver_test';
-    private $collection='test_collection';
-
     private function connect()
     {
         $adapter = new Adapter();
-        $adapter->connect($this->connection);
-        $adapter->selectDB($this->db);
+        $adapter->connect(CONNECTION);
+        $adapter->selectDB(DB);
 
         return $adapter;
     }
 
-    public function testConnectSuccessful()
+    public function testConnectSuccess()
     {
         $result = TRUE;
 
@@ -28,7 +24,7 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($result);
     }
 
-    public function testConnectFail()
+    public function testConnectFailure()
     {
         $adapter = new Adapter();
         $result = FALSE;
@@ -45,7 +41,7 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
     {
         $adapter = $this->connect();
 
-        if ($drop) $adapter->drop($this->collection);
+        if ($drop) $adapter->drop(TEST_COLLECTION);
 
         $adapter->insert('test_collection', ['name' => 'test']);
         $result = $adapter->findOne('test_collection', new \MongoDriver\Filter('name', 'test'));
@@ -58,7 +54,7 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
     {
         $adapter = $this->connect();
 
-        $adapter->drop($this->collection);
+        $adapter->drop(TEST_COLLECTION);
         $adapter->bulkInsert('test_collection', [['name' => 'test1'], ['name' => 'test2'], ['name' => 'test3']]);
         $result = $adapter->find('test_collection', new Filter('name', ['test1', 'test2', 'test3'], Filter::IS_IN_ARRAY));
 
