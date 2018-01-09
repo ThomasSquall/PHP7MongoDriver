@@ -2,6 +2,11 @@ language: php
 php:
   - '7.0'
   - '7.1'
-install:
-  - pecl install mongodb
-  - composer require thomas-squall/php-magic-annotations
+before_install:
+  - sudo apt-get update
+  - sudo pecl install mongodb
+  - sudo echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - sudo php ~/.phpenv/versions/$(phpenv version-name)/bin/composer.phar self-update
+before_script:
+  - composer install
+script: phpunit -- configuration phpunit.xml --coverage-text
