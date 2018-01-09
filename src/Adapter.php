@@ -7,6 +7,7 @@ include_once "Result.php";
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 use MongoDB\Driver\BulkWrite;
+use MongoDB\Driver\Command;
 
 class Adapter
 {
@@ -99,5 +100,11 @@ class Adapter
         foreach ($items as $item) $bulk->insert($item);
 
         $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
+    }
+
+    public function drop($collection)
+    {
+        $command = new Command(["drop" => $collection]);
+        $this->db->executeCommand($this->dbName, $command);
     }
 }
