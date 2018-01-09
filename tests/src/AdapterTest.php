@@ -7,7 +7,7 @@ use MongoDriver\Filter;
 
 class AdapterTest extends \PHPUnit\Framework\TestCase
 {
-    private $connection='mongodb://localhost:27017';
+    private $connection='mongodb://localhost:434';
     private $db='mongo_driver_test';
     private $collection='test_collection';
 
@@ -47,7 +47,7 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
     {
         $adapter = $this->connect();
 
-        $adapter->drop($this->collection);
+//        $adapter->drop($this->collection);
         $adapter->insert('test_collection', ['name' => 'test']);
         $result = $adapter->findOne('test_collection', new \MongoDriver\Filter('name', 'test'));
 

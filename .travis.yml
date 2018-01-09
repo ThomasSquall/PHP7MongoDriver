@@ -10,4 +10,4 @@ before_install:
   - echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 install:
   - composer install
-script: vendor/bin/phpunit --configuration phpunit.xml --coverage-text
+script: vendor/bin/phpunit --configuration phpunit.xml
