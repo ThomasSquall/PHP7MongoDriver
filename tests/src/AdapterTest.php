@@ -1,5 +1,7 @@
 <?php
 
+include_once dirname(__FILE__) . "/../../autoload.php";
+
 use MongoDriver\Adapter;
 use MongoDriver\Filter;
 
