@@ -6,7 +6,6 @@ php:
 services: mongodb
 before_install:
   - sudo apt-get update
-  - sudo /bin/bash /etc/init.d/mongodb start
   - pecl install mongodb
   - echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 install:
