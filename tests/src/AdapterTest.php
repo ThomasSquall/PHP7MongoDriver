@@ -25,7 +25,7 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
         $result = TRUE;
 
         try { $this->connect(); }
-        catch (Exception $ex) { $result = FALSE; }
+        catch (Exception $ex) { $result = false; }
 
         $this->assertTrue($result);
     }
@@ -36,18 +36,19 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
         $result = FALSE;
 
         try { $adapter->connect('dfsfdsf'); }
-        catch (Exception $ex) { $result = TRUE; }
+        catch (Exception $ex) { $result = true; }
 
         $this->assertTrue($result);
     }
 
-    public function testSelectDB() { $this->assertTrue(TRUE); }
+    public function testSelectDB() { $this->assertTrue(true); }
 
-    public function testFindOne()
+    public function testFindOne($drop = false)
     {
         $adapter = $this->connect();
 
-        $adapter->drop($this->collection);
+        if ($drop) $adapter->drop($this->collection);
+
         $adapter->insert('test_collection', ['name' => 'test']);
         $result = $adapter->findOne('test_collection', new \MongoDriver\Filter('name', 'test'));
 
@@ -73,7 +74,7 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
 
     public function testDrop()
     {
+        $this->testFindOne(true);
         $this->testFind();
-        $this->testFindOne();
     }
 }
