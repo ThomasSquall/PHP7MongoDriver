@@ -1,5 +1,3 @@
-dist: trusty
-sudo: required
 language: php
 php:
   - '7.0'
@@ -10,6 +8,5 @@ before_install:
   - pecl install mongodb
   - echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 install:
-  - service mongod start
   - composer install
 script: vendor/bin/phpunit --configuration phpunit.xml --coverage-text
