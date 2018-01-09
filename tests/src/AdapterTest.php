@@ -47,7 +47,7 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
     {
         $adapter = $this->connect();
 
-//        $adapter->drop($this->collection);
+        $adapter->drop($this->collection);
         $adapter->insert('test_collection', ['name' => 'test']);
         $result = $adapter->findOne('test_collection', new \MongoDriver\Filter('name', 'test'));
 
