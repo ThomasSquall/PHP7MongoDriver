@@ -1,8 +1,9 @@
 ## MongoDriver for PHP7
 
-[![Coverage Status](https://coveralls.io/repos/github/ThomasSquall/PHP7MongoDriver/badge.svg?branch=master)](https://coveralls.io/github/ThomasSquall/PHP7MongoDriver?branch=master)
-[![Build Status](https://travis-ci.org/ThomasSquall/PHP7MongoDriver.svg?branch=master)](https://travis-ci.org/ThomasSquall/PHP7MongoDriver)
 [![Latest Stable Version](https://poser.pugx.org/thomas-squall/php7-mongo-driver/v/stable.svg)](https://packagist.org/packages/thomas-squall/php7-mongo-driver) 
+[![Build Status](https://travis-ci.org/ThomasSquall/PHP7MongoDriver.svg?branch=master)](https://travis-ci.org/ThomasSquall/PHP7MongoDriver)
+[![Coverage Status](https://coveralls.io/repos/github/ThomasSquall/PHP7MongoDriver/badge.svg?branch=master)](https://coveralls.io/github/ThomasSquall/PHP7MongoDriver?branch=master)
+[![codecov](https://codecov.io/gh/ThomasSquall/PHP7MongoDriver/branch/master/graph/badge.svg)](https://codecov.io/gh/ThomasSquall/PHP7MongoDriver)
 [![Total Downloads](https://poser.pugx.org/thomas-squall/php7-mongo-driver/downloads.svg)](https://packagist.org/thomas-squall/php7-mongo-driver) 
 [![License](https://poser.pugx.org/thomas-squall/php7-mongo-driver/license.svg)](https://packagist.org/packages/thomas-squall/php7-mongo-driver)
 
