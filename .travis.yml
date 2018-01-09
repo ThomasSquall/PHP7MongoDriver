@@ -9,6 +9,6 @@ before_install:
   - pecl install mongodb
   - echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 install:
-  - sudo service mongod start
+  - service mongod start
   - composer install
 script: vendor/bin/phpunit --configuration phpunit.xml --coverage-text
