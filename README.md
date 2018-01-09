@@ -1,5 +1,9 @@
 ## MongoDriver for PHP7
 
+[![Latest Stable Version](https://poser.pugx.org/thomas-squall/php7-mongo-driver/v/stable.svg)](https://packagist.org/packages/thomas-squall/php7-mongo-driver) 
+[![Total Downloads](https://poser.pugx.org/thomas-squall/php7-mongo-driver/downloads.svg)](https://packagist.org/thomas-squall/php7-mongo-driver) 
+[![License](https://poser.pugx.org/thomas-squall/php7-mongo-driver/license.svg)](https://packagist.org/packages/thomas-squall/php7-mongo-driver)
+
 With the advent of PHP7 the old mongodb driver is no more supported.
 
 The new driver available is a little bit low-level compared to the previous one so it can be a bit complicated to work with.
