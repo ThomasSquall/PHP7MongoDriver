@@ -1,5 +1,6 @@
 ## MongoDriver for PHP7
 
+[![Coverage Status](https://coveralls.io/repos/github/ThomasSquall/PHP7MongoDriver/badge.svg?branch=master)](https://coveralls.io/github/ThomasSquall/PHP7MongoDriver?branch=master)
 [![Build Status](https://travis-ci.org/ThomasSquall/PHP7MongoDriver.svg?branch=master)](https://travis-ci.org/ThomasSquall/PHP7MongoDriver)
 [![Latest Stable Version](https://poser.pugx.org/thomas-squall/php7-mongo-driver/v/stable.svg)](https://packagist.org/packages/thomas-squall/php7-mongo-driver) 
 [![Total Downloads](https://poser.pugx.org/thomas-squall/php7-mongo-driver/downloads.svg)](https://packagist.org/thomas-squall/php7-mongo-driver) 
