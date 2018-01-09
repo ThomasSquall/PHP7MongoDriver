@@ -7,7 +7,7 @@ use MongoDriver\Filter;
 
 class AdapterTest extends \PHPUnit\Framework\TestCase
 {
-    private $connection='mongodb://localhost:434';
+    private $connection='mongodb://localhost:27017';
     private $db='mongo_driver_test';
     private $collection='test_collection';
 
