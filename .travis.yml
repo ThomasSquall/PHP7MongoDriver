@@ -2,6 +2,7 @@ language: php
 php:
   - '7.0'
   - '7.1'
+services: mongodb
 before_install:
   - sudo apt-get update
   - pecl install mongodb
