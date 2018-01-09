@@ -1,11 +1,12 @@
 dist: trusty
+sudo: required
 language: php
 php:
   - '7.0'
   - '7.1'
 services: mongodb
 before_install:
-  - sudo apt-get update
+  - apt-get update
   - pecl install mongodb
   - echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 install:
