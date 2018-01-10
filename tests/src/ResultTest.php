@@ -81,4 +81,24 @@ class ResultTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(1, $result);
         $this->assertEquals(29, $result[0]->owner[0]->age);
     }
+
+    public function testOffsetSetOnNull()
+    {
+        $result = new Result([], DB, TEST_COLLECTION, $this->connect());
+        $this->assertCount(0, $result);
+
+        $result[] = ['name', 'Test'];
+        $this->assertCount(1, $result);
+        $this->assertEquals(['name', 'Test'], $result[0]);
+    }
+
+    public function testOffsetSetOnKey()
+    {
+        $result = new Result([], DB, TEST_COLLECTION, $this->connect());
+        $this->assertCount(0, $result);
+
+        $result['test'] = ['name', 'Test'];
+        $this->assertCount(1, $result);
+        $this->assertEquals(['name', 'Test'], $result['test']);
+    }
 }
