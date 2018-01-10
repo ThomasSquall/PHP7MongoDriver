@@ -14,7 +14,7 @@ class Car
     public $make;
 
     /**
-     * [\MongoDriver\Models\Fields\Ref(model = "Person", field = "name")]
+     * [\MongoDriver\Models\Fields\Ref(model = "\MongoDriver\Tests\Person", field = "name")]
      * @var string $owner
      */
     public $owner;

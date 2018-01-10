@@ -5,13 +5,18 @@ use MongoDriver\Filter;
 
 class AdapterTest extends \PHPUnit\Framework\TestCase
 {
+    private $adapter = null;
+
     private function connect()
     {
-        $adapter = new Adapter();
-        $adapter->connect(CONNECTION);
-        $adapter->selectDB(DB);
+        if (is_null($this->adapter))
+        {
+            $this->adapter = new Adapter();
+            $this->adapter->connect(CONNECTION);
+            $this->adapter->selectDB(DB);
+        }
 
-        return $adapter;
+        return $this->adapter;
     }
 
     public function testConnectSuccess()
@@ -37,14 +42,13 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
 
     public function testSelectDB() { $this->assertTrue(true); }
 
-    public function testFindOne($drop = false)
+    public function testFindOne()
     {
         $adapter = $this->connect();
 
-        if ($drop) $adapter->drop(TEST_COLLECTION);
-
-        $adapter->insert('test_collection', ['name' => 'test']);
-        $result = $adapter->findOne('test_collection', new \MongoDriver\Filter('name', 'test'));
+        $adapter->drop(TEST_COLLECTION);
+        $adapter->insert(TEST_COLLECTION, ['name' => 'test']);
+        $result = $adapter->findOne(TEST_COLLECTION, new \MongoDriver\Filter('name', 'test'));
 
         $this->assertInstanceOf('\MongoDriver\Result', $result);
         $this->assertCount(1, $result);
@@ -55,8 +59,8 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
         $adapter = $this->connect();
 
         $adapter->drop(TEST_COLLECTION);
-        $adapter->bulkInsert('test_collection', [['name' => 'test1'], ['name' => 'test2'], ['name' => 'test3']]);
-        $result = $adapter->find('test_collection', new Filter('name', ['test1', 'test2', 'test3'], Filter::IS_IN_ARRAY));
+        $adapter->bulkInsert(TEST_COLLECTION, [['name' => 'test1'], ['name' => 'test2'], ['name' => 'test3']]);
+        $result = $adapter->find(TEST_COLLECTION, new Filter('name', ['test1', 'test2', 'test3'], Filter::IS_IN_ARRAY));
 
         $this->assertInstanceOf('\MongoDriver\Result', $result);
         $this->assertCount(3, $result);
@@ -66,9 +70,16 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
 
     public function testBulkInsert() { $this->testFind(); }
 
+    public function testListCollections()
+    {
+        $adapter = $this->connect();
+
+        $this->assertGreaterThanOrEqual(1, count($adapter->listCollections()));
+    }
+
     public function testDrop()
     {
-        $this->testFindOne(true);
+        $this->testFindOne();
         $this->testFind();
     }
 }

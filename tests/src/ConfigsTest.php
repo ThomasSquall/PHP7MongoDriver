@@ -1,22 +1,11 @@
 <?php
 
-use MongoDriver\Adapter;
 use MongoDriver\Configs;
 use MongoDriver\Tests\Car;
 use MongoDriver\Tests\NoModel;
-use MongoDriver\Tests\Person;
 
 class ConfigsTest extends \PHPUnit\Framework\TestCase
 {
-    private function connect()
-    {
-        $adapter = new Adapter();
-        $adapter->connect(CONNECTION_STRING);
-        $adapter->selectDB(DB);
-
-        return $adapter;
-    }
-
     public function testRegisterModelSuccess()
     {
         $exception = '';

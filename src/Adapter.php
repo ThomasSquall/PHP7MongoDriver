@@ -8,6 +8,7 @@ use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 use MongoDB\Driver\BulkWrite;
 use MongoDB\Driver\Command;
+use MongoDB\Driver\Cursor;
 
 class Adapter
 {
@@ -58,11 +59,7 @@ class Adapter
         $query = new Query($filtersArray, $options);
         $rows = $this->db->executeQuery("$this->dbName.$collection", $query);
 
-        $result = [];
-
-        foreach ($rows as $row) $result[] = $row;
-
-        return new Result($result, $this->dbName, $collection, $this);
+        return $this->getResult($rows, $collection);
     }
 
     /**
@@ -102,9 +99,44 @@ class Adapter
         $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
     }
 
+    /**
+     * Lists all the collections.
+     * @return Result
+     */
+    public function listCollections()
+    {
+        $command = new Command(["listCollections" => 1]);
+        $rows = $this->db->executeCommand($this->dbName, $command);
+
+        return $this->getResult($rows);
+    }
+
+    /**
+     * Drops a collection if exists.
+     * @param string $collection
+     */
     public function drop($collection)
     {
-        $command = new Command(["drop" => $collection]);
-        $this->db->executeCommand($this->dbName, $command);
+        $collections = $this->listCollections();
+
+        foreach ($collections as $col)
+        {
+            if ($col->name === $collection)
+            {
+                $command = new Command(["drop" => $collection]);
+                $this->db->executeCommand($this->dbName, $command);
+
+                break;
+            }
+        }
+    }
+
+    private function getResult(Cursor $rows, $collection = '')
+    {
+        $result = [];
+
+        foreach ($rows as $row) $result[] = $row;
+
+        return new Result($result, $this->dbName, $collection, $this);
     }
 }

@@ -12,4 +12,8 @@ class Person
      * @var string $name
      */
     public $name;
+    /**
+     * @var int $age
+     */
+    public $age;
 }

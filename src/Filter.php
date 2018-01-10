@@ -123,7 +123,7 @@ class Filter
 
                 break;
             default:
-                $result = [$this->field => [$this->operator=>$this->value]];
+                $result = [$this->field => [$this->operator => $this->value]];
 
                 break;
         }
