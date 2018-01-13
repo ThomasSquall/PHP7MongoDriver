@@ -2,9 +2,9 @@
 
 namespace MongoDriver\Models;
 
-use PHPAnnotations\Annotations\TC_Annotation;
+use PHPAnnotations\Annotations\Annotation;
 
-class AnnotationBase extends TC_Annotation
+class AnnotationBase extends Annotation
 {
     /**
      * __get magic method used to retrieve the name.

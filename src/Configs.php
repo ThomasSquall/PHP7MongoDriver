@@ -2,7 +2,7 @@
 
 namespace MongoDriver;
 
-use PHPAnnotations\Reflection\TC_Reflector;
+use PHPAnnotations\Reflection\Reflector;
 
 final class Configs
 {
@@ -16,7 +16,7 @@ final class Configs
      */
     public static function registerModel($db, $model)
     {
-        $classReflector = (new TC_Reflector($model))->getClass();
+        $classReflector = (new Reflector($model))->getClass();
 
         if (!$classReflector->hasAnnotation('\MongoDriver\Models\Model'))
             throw new \Exception("No Model annotation found in class " . get_class($model));

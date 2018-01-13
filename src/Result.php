@@ -2,7 +2,7 @@
 
 namespace MongoDriver;
 
-use PHPAnnotations\Reflection\TC_Reflector;
+use PHPAnnotations\Reflection\Reflector;
 
 class Result implements \IteratorAggregate, \ArrayAccess, \Countable
 {
@@ -61,7 +61,7 @@ class Result implements \IteratorAggregate, \ArrayAccess, \Countable
     {
         if (!Configs::isModelRegistered($this->db, $this->collection)) return $this;
 
-        $reflector = new TC_Reflector(Configs::getModel($this->db, $this->collection));
+        $reflector = new Reflector(Configs::getModel($this->db, $this->collection));
         $fieldAnnotations = $reflector->getProperty($field);
 
         if (is_null($fieldAnnotations)) return $this;
@@ -72,7 +72,7 @@ class Result implements \IteratorAggregate, \ArrayAccess, \Countable
 
         if (!class_exists($model)) return $this;
 
-        $referenceReflector = (new TC_Reflector(new $model()))->getClass();
+        $referenceReflector = (new Reflector(new $model()))->getClass();
 
         if (!$referenceReflector->hasAnnotation('\MongoDriver\Models\Model')) return $this;
 
