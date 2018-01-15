@@ -20,7 +20,7 @@ https://github.com/ThomasSquall/PHP7MongoDriver/wiki
 
 Using composer is quite simple, just run the following command:
 ```
-$ composer install thomas-squall/php7-mongo-driver
+$ composer require thomas-squall/php7-mongo-driver
 ```
 
 ### Prerequisites
