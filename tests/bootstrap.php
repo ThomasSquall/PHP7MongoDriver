@@ -1,9 +1,9 @@
 <?php
 
-include_once dirname(__FILE__) . "/../vendor/autoload.php";
-include_once dirname(__FILE__) . "/Car.php";
-include_once dirname(__FILE__) . "/NoModel.php";
-include_once dirname(__FILE__) . "/Person.php";
+require_once dirname(__FILE__) . "/../vendor/autoload.php";
+require_once dirname(__FILE__) . "/Car.php";
+require_once dirname(__FILE__) . "/NoModel.php";
+require_once dirname(__FILE__) . "/Person.php";
 
 define('CONNECTION', 'mongodb://localhost:27017');
 define('DB', 'mongo_driver_test');

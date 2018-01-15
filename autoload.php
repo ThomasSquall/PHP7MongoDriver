@@ -1,11 +1,11 @@
 <?php
 
-include_once dirname(__FILE__) . "/vendor/autoload.php";
-include_once dirname(__FILE__) . "/src/Adapter.php";
-include_once dirname(__FILE__) . "/src/Filter.php";
-include_once dirname(__FILE__) . "/src/Result.php";
-include_once dirname(__FILE__) . "/src/Configs.php";
-include_once dirname(__FILE__) . "/src/Models/AnnotationBase.php";
-include_once dirname(__FILE__) . "/src/Models/ModelAnnotation.php";
-include_once dirname(__FILE__) . "/src/Models/Fields/DefaultAnnotation.php";
-include_once dirname(__FILE__) . "/src/Models/Fields/RefAnnotation.php";
+require_once dirname(__FILE__) . "/vendor/autoload.php";
+require_once dirname(__FILE__) . "/src/Adapter.php";
+require_once dirname(__FILE__) . "/src/Filter.php";
+require_once dirname(__FILE__) . "/src/Result.php";
+require_once dirname(__FILE__) . "/src/Configs.php";
+require_once dirname(__FILE__) . "/src/Models/AnnotationBase.php";
+require_once dirname(__FILE__) . "/src/Models/ModelAnnotation.php";
+require_once dirname(__FILE__) . "/src/Models/Fields/DefaultAnnotation.php";
+require_once dirname(__FILE__) . "/src/Models/Fields/RefAnnotation.php";

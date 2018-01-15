@@ -2,8 +2,6 @@
 
 namespace MongoDriver;
 
-include_once "Result.php";
-
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\Query;
 use MongoDB\Driver\BulkWrite;
@@ -15,7 +13,7 @@ class Adapter
     /** @var Manager $db */
     private $db;
     /** @var string $dbName */
-    private $dbName;
+    private $dbName = '';
 
     /**
      * Connects to a mongo database.
@@ -36,6 +34,20 @@ class Adapter
     public function selectDB($dbName) { $this->dbName = $dbName; }
 
     /**
+     * Finds the first item in the collection matching the filters.
+     * @param string $collection
+     * @param \MongoDriver\Filter[]|\MongoDriver\Filter $filters
+     * @param array $options
+     * @return Result
+     */
+    public function findOne($collection, $filters = [], $options = [])
+    {
+        $options['limit'] = 1;
+
+        return $this->find($collection, $filters, $options);
+    }
+
+    /**
      * Finds the items in the collection matching the filters.
      * @param string $collection
      * @param \MongoDriver\Filter[]|\MongoDriver\Filter $filters
@@ -44,6 +56,8 @@ class Adapter
      */
     public function find($collection, $filters = [], $options = [])
     {
+        $this->checkDB();
+
         if (is_a($filters, '\MongoDriver\Filter')) $filters = [$filters];
 
         $filtersArray = [];
@@ -63,20 +77,6 @@ class Adapter
     }
 
     /**
-     * Finds the first item in the collection matching the filters.
-     * @param string $collection
-     * @param \MongoDriver\Filter[]|\MongoDriver\Filter $filters
-     * @param array $options
-     * @return Result
-     */
-    public function findOne($collection, $filters = [], $options = [])
-    {
-        $options['limit'] = 1;
-
-        return $this->find($collection, $filters, $options);
-    }
-
-    /**
      * Inserts an item.
      * @param string $collection
      * @param array|object $item
@@ -90,6 +90,8 @@ class Adapter
      */
     public function bulkInsert($collection, $items)
     {
+        $this->checkDB();
+
         if (!is_array($items) || count($items) == 0) return;
 
         $bulk = new BulkWrite(['ordered'=>TRUE]);
@@ -105,6 +107,8 @@ class Adapter
      */
     public function listCollections()
     {
+        $this->checkDB();
+
         $command = new Command(["listCollections" => 1]);
         $rows = $this->db->executeCommand($this->dbName, $command);
 
@@ -117,6 +121,8 @@ class Adapter
      */
     public function drop($collection)
     {
+        $this->checkDB();
+
         $collections = $this->listCollections();
 
         foreach ($collections as $col)
@@ -139,4 +145,6 @@ class Adapter
 
         return new Result($result, $this->dbName, $collection, $this);
     }
+
+    private function checkDB() { if ($this->dbName === '') throw new \Exception("No database has been selected!"); }
 }
