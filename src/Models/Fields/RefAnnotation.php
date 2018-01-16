@@ -2,12 +2,16 @@
 
 namespace MongoDriver\Models\Fields;
 
-use MongoDriver\Models\AnnotationBase;
+use PHPAnnotations\Annotations\Annotation;
 
-class RefAnnotation extends AnnotationBase
+/**
+ * Class RefAnnotation.
+ * @package MongoDriver\Models\Fields
+ */
+class RefAnnotation extends Annotation
 {
-    private $model = '';
-    private $field = '';
+    protected $model = '';
+    protected $field = '';
 
     /**
      * RefAnnotation constructor.
@@ -19,7 +23,4 @@ class RefAnnotation extends AnnotationBase
         $this->model = $model;
         $this->field = $field;
     }
-
-    protected function getModel() { return $this->model; }
-    protected function getField() { return $this->field; }
 }

@@ -1,4 +1,4 @@
-## MongoDriver for PHP7
+# MongoDriver for PHP7
 
 [![Latest Stable Version](https://poser.pugx.org/thomas-squall/php7-mongo-driver/v/stable.svg)](https://packagist.org/packages/thomas-squall/php7-mongo-driver) 
 [![Build Status](https://travis-ci.org/ThomasSquall/PHP7MongoDriver.svg?branch=master)](https://travis-ci.org/ThomasSquall/PHP7MongoDriver)
@@ -16,14 +16,14 @@ This is what this library was conceived for.
 **!!! FOR DETAILED GUIDELINES CONSULT THE WIKI AT:**
 https://github.com/ThomasSquall/PHP7MongoDriver/wiki
 
-### Installation
+## Installation
 
 Using composer is quite simple, just run the following command:
 ``` sh
 $ composer require thomas-squall/php7-mongo-driver
 ```
 
-### Prerequisites
+## Prerequisites
 
 Before using this library you should make sure to have installed PHP7.0 or major and MongoDb driver from pecl.
 
@@ -39,7 +39,7 @@ extension=mongodb.so
 ```
 Inside your php.ini
 
-### Usage
+## Usage
 
 At first you need to define a connection string.
 
@@ -68,6 +68,8 @@ $adapter->selectDB('myDatabase');
 ```
 NOTE: you could select a database directly on the constructor passing the database name as the 2nd parameter.
 
+### Find
+
 Once selected the database we can simply query for the collection we want:
 
 ``` php
@@ -85,6 +87,20 @@ $filters =
 ];
 
 $items = $adapter->find('myCollection', $filters);
+```
+
+### Insert
+
+If you want to insert an item you have simply to pass an array or an object to the insert function specifying the collection:
+
+``` php
+$item = new Person();
+$item->name = 'Thomas';
+$item->surname = 'Cocchiara');
+
+// or: $item = ['name' => 'Thomas', 'surname' => 'Cocchiara'];
+
+$adapter->insert('people', $item);
 ```
 
 Hope you guys find this library useful.

@@ -7,6 +7,7 @@ use MongoDB\Driver\Query;
 use MongoDB\Driver\BulkWrite;
 use MongoDB\Driver\Command;
 use MongoDB\Driver\Cursor;
+use PHPAnnotations\Reflection\Reflector;
 
 class Adapter
 {
@@ -14,6 +15,56 @@ class Adapter
     private $db;
     /** @var string $dbName */
     private $dbName = '';
+    /** @var array $models */
+    private $models = [];
+
+    /**
+     * Registers a class as a model handler.
+     * @param object $model
+     * @throws \Exception
+     */
+    public function registerModel($model)
+    {
+        $this->checkDB();
+
+        $classReflector = (new Reflector($model))->getClass();
+
+        if (!$classReflector->hasAnnotation('\MongoDriver\Models\Model'))
+            throw new \Exception("No Model annotation found in class " . get_class($model));
+
+        $collection = $classReflector->getAnnotation('\MongoDriver\Models\Model')->name;
+
+        if (!isset($this->models[$this->dbName])) $this->models[$this->dbName] = [];
+
+        $this->models[$this->dbName][$collection] = $model;
+    }
+
+    /**
+     * Checks if a models has been registered for the given db - collection pair.
+     * @param string $collection
+     * @return bool
+     */
+    public function isModelRegistered($collection)
+    {
+        $this->checkDB();
+
+        if (!isset($this->models[$this->dbName])) return false;
+        if (!isset($this->models[$this->dbName][$collection])) return false;
+
+        return true;
+    }
+
+    /**
+     * Gets the model registered for the given db - collection pair.
+     * @param string $collection
+     * @return object
+     */
+    public function getModel($collection)
+    {
+        if (!$this->isModelRegistered($collection)) return null;
+
+        return $this->models[$this->dbName][$collection];
+    }
 
     /**
      * Connects to a mongo database.
@@ -96,7 +147,30 @@ class Adapter
 
         $bulk = new BulkWrite(['ordered'=>TRUE]);
 
-        foreach ($items as $item) $bulk->insert($item);
+        foreach ($items as &$item)
+        {
+            if (is_object($item))
+            {
+                $reflector = new Reflector($item);
+
+                if ($reflector->getClass()->hasAnnotation('\MongoDriver\Models\Model'))
+                {
+                    $newItem = [];
+
+                    foreach ($item as $param => $value)
+                    {
+                        if (!$reflector->getProperty($param)->hasAnnotation('\MongoDriver\Models\Fields\DoNotStore'))
+                        {
+                            $newItem[$param] = $value;
+                        }
+                    }
+
+                    $item = $newItem;
+                }
+            }
+
+            $bulk->insert($item);
+        }
 
         $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
     }

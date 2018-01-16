@@ -1,7 +1,6 @@
 <?php
 
 use MongoDriver\Adapter;
-use MongoDriver\Configs;
 use MongoDriver\Filter;
 use MongoDriver\Result;
 use MongoDriver\Tests\Car;
@@ -50,8 +49,8 @@ class ResultTest extends \PHPUnit\Framework\TestCase
         $adapter->drop(CARS_COLLECTION);
         $adapter->drop(PEOPLE_COLLECTION);
 
-        Configs::registerModel(DB, new Car());
-        Configs::registerModel(DB, new Person());
+        $adapter->registerModel(new Car());
+        $adapter->registerModel(new Person());
 
         $car1 = new Car();
         $car1->make = 'FIAT';

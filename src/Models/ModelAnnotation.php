@@ -2,15 +2,19 @@
 
 namespace MongoDriver\Models;
 
-class ModelAnnotation extends AnnotationBase
+use PHPAnnotations\Annotations\Annotation;
+
+/**
+ * Class ModelAnnotation.
+ * @package MongoDriver\Models
+ */
+class ModelAnnotation extends Annotation
 {
-    private $name;
+    protected $name;
 
     /**
      * Model constructor.
      * @param string $name
      */
     public function __construct($name = '') { $this->name = $name; }
-
-    protected function getName() { return $this->name; }
 }

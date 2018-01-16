@@ -28,10 +28,10 @@ class Result implements \IteratorAggregate, \ArrayAccess, \Countable
         $this->collection = $collection;
         $this->adapter = $adapter;
 
-        if (Configs::isModelRegistered($this->db, $this->collection))
+        if ($this->adapter->isModelRegistered($this->collection))
         {
             $items = [];
-            $class = get_class(Configs::getModel($this->db, $this->collection));
+            $class = get_class($this->adapter->getModel($this->collection));
 
             foreach ($this->items as $fields)
             {
@@ -59,9 +59,9 @@ class Result implements \IteratorAggregate, \ArrayAccess, \Countable
      */
     public function populate($field)
     {
-        if (!Configs::isModelRegistered($this->db, $this->collection)) return $this;
+        if (!$this->adapter->isModelRegistered($this->collection)) return $this;
 
-        $reflector = new Reflector(Configs::getModel($this->db, $this->collection));
+        $reflector = new Reflector($this->adapter->getModel($this->collection));
         $fieldAnnotations = $reflector->getProperty($field);
 
         if (is_null($fieldAnnotations)) return $this;
@@ -78,7 +78,7 @@ class Result implements \IteratorAggregate, \ArrayAccess, \Countable
 
         $referenceCollection = $referenceReflector->getAnnotation('\MongoDriver\Models\Model');
 
-        if (!Configs::isModelRegistered($this->db, $referenceCollection->name)) return $this;
+        if (!$this->adapter->isModelRegistered($referenceCollection->name)) return $this;
 
         foreach ($this->items as &$item)
         {

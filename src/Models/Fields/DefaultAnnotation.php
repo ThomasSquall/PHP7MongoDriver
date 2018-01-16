@@ -2,17 +2,19 @@
 
 namespace MongoDriver\Models\Fields;
 
-use MongoDriver\Models\AnnotationBase;
+use PHPAnnotations\Annotations\Annotation;
 
-class DefaultAnnotation extends AnnotationBase
+/**
+ * Class DefaultAnnotation.
+ * @package MongoDriver\Models\Fields
+ */
+class DefaultAnnotation extends Annotation
 {
-    private $value;
+    protected $value;
 
     /**
      * DefaultAnnotation constructor.
      * @param string $value
      */
     public function __construct($value = '') { $this->value = $value; }
-
-    protected function getValue() { return $this->value; }
 }

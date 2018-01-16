@@ -18,4 +18,10 @@ class Car
      * @var string $owner
      */
     public $owner;
+
+    /**
+     * [\MongoDriver\Models\Fields\DoNotStore]
+     * @var string $doNotSave
+     */
+    public $doNotStore;
 }
