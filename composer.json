@@ -1,7 +1,7 @@
 {
     "name": "thomas-squall/php7-mongo-driver",
     "description": "PHP7 Driver for MongoDb",
-    "version": "0.5.0",
+    "version": "0.5.4",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [

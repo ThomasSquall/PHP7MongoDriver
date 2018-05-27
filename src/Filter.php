@@ -3,6 +3,7 @@
 namespace MongoDriver;
 
 use Exception;
+use MongoDB\BSON\ObjectID;
 
 class Filter
 {
@@ -101,6 +102,8 @@ class Filter
 
                 break;
         }
+
+        if ($field === '_id') $this->value = new ObjectID($this->value);
     }
 
     /**

@@ -131,21 +131,25 @@ class Adapter
      * Inserts an item.
      * @param string $collection
      * @param array|object $item
+     * @return mixed
      */
-    public function insert($collection, $item) { $this->bulkInsert($collection, [$item]); }
+    public function insert($collection, $item) { return $this->bulkInsert($collection, [$item])[0]; }
 
     /**
      * Inserts an array of items.
      * @param string $collection
      * @param array $items
+     * @return array
      */
     public function bulkInsert($collection, $items)
     {
         $this->checkDB();
 
-        if (!is_array($items) || count($items) == 0) return;
+        if (!is_array($items) || count($items) == 0) return [];
 
         $bulk = new BulkWrite(['ordered'=>TRUE]);
+
+        $result = [];
 
         foreach ($items as &$item)
         {
@@ -169,10 +173,12 @@ class Adapter
                 }
             }
 
-            $bulk->insert($item);
+            $result[] = $bulk->insert($item);
         }
 
         $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
+
+        return $result;
     }
 
     /**
