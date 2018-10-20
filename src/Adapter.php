@@ -182,6 +182,31 @@ class Adapter
     }
 
     /**
+     * Update an item based on search fields.
+     * @param string $collection
+     * @param array $search
+     * @param array $update
+     * @return array
+     */
+    public function update($collection, $search, $update)
+    {
+        $this->checkDB();
+
+        $bulk = new BulkWrite();
+
+        $result = $bulk->update
+        (
+            $search,
+            ['$set' => $update],
+            ['multi' => false, 'upsert' => false]
+        );
+
+        $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
+
+        return $result;
+    }
+
+    /**
      * Lists all the collections.
      * @return Result
      */

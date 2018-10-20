@@ -85,6 +85,25 @@ class AdapterTest extends \PHPUnit\Framework\TestCase
 
     public function testBulkInsert() { $this->testFind(); }
 
+    public function testUpdate()
+    {
+        $adapter = $this->connect();
+
+        $adapter->drop(TEST_COLLECTION);
+        $adapter->insert(TEST_COLLECTION, ['name' => 'test']);
+        $result = $adapter->findOne(TEST_COLLECTION, new \MongoDriver\Filter('name', 'test'));
+
+        $this->assertInstanceOf('\MongoDriver\Result', $result);
+        $this->assertEquals($result[0]->name, 'test');
+
+        $adapter->update(TEST_COLLECTION, ['name' => 'test'], ['name' => 'test2']);
+
+        $result = $adapter->findOne(TEST_COLLECTION, new \MongoDriver\Filter('name', 'test2'));
+
+        $this->assertInstanceOf('\MongoDriver\Result', $result);
+        $this->assertCount(1, $result);
+    }
+
     public function testListCollections()
     {
         $adapter = $this->connect();
