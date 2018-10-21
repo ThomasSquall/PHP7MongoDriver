@@ -262,12 +262,12 @@ class Adapter
         if (is_object($obj))
         {
             $tmp = (array)$obj;
-            $search = [];
+            $obj = [];
 
             foreach ($tmp as $param => $value)
             {
                 if (isset($value))
-                    $search[$param] = $value;
+                    $obj[$param] = $value;
             }
 
             unlink($tmp);
