@@ -184,17 +184,19 @@ class Adapter
     /**
      * Update an item based on search fields.
      * @param string $collection
-     * @param array $search
+     * @param array| $search
      * @param array $update
-     * @return array
      */
     public function update($collection, $search, $update)
     {
         $this->checkDB();
 
+        $search = $this->objToCleanArray($search);
+        $update = $this->objToCleanArray($update);
+
         $bulk = new BulkWrite();
 
-        $result = $bulk->update
+        $bulk->update
         (
             $search,
             ['$set' => $update],
@@ -202,8 +204,6 @@ class Adapter
         );
 
         $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
-
-        return $result;
     }
 
     /**
@@ -252,4 +252,27 @@ class Adapter
     }
 
     private function checkDB() { if ($this->dbName === '') throw new \Exception("No database has been selected!"); }
+
+    /**
+     * @param mixed $obj
+     * @return mixed
+     */
+    private function objToCleanArray($obj)
+    {
+        if (is_object($obj))
+        {
+            $tmp = (array)$obj;
+            $search = [];
+
+            foreach ($tmp as $param => $value)
+            {
+                if (isset($value))
+                    $search[$param] = $value;
+            }
+
+            unlink($tmp);
+        }
+
+        return $obj;
+    }
 }
