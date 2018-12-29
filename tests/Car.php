@@ -3,25 +3,28 @@
 namespace MongoDriver\Tests;
 
 /**
- * [\MongoDriver\Models\Model(name = "cars")]
+ * @MongoDriver\Models\Model(name = "cars")
  */
 class Car
 {
     /**
-     * [\MongoDriver\Models\Fields\Required]
      * @var string $make
+     *
+     * @MongoDriver\Models\Fields\Required
      */
     public $make;
 
     /**
-     * [\MongoDriver\Models\Fields\Ref(model = "\MongoDriver\Tests\Person", field = "name")]
      * @var string $owner
+     *
+     * @MongoDriver\Models\Fields\Ref(model = "\MongoDriver\Tests\Person", field = "name")
      */
     public $owner;
 
     /**
-     * [\MongoDriver\Models\Fields\DoNotStore]
      * @var string $doNotSave
+     *
+     * @MongoDriver\Models\Fields\DoNotStore
      */
     public $doNotStore;
 }
