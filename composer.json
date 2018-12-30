@@ -1,7 +1,7 @@
 {
     "name": "thomas-squall/php7-mongo-driver",
     "description": "PHP7 Driver for MongoDb",
-    "version": "0.6.7",
+    "version": "0.7.0",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.0",
         "ext-mongodb": "*",
-        "thomas-squall/php-magic-annotations": "^0.8.7"
+        "thomas-squall/php-magic-annotations": "^0.9.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
