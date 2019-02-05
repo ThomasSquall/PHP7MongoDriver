@@ -182,9 +182,9 @@ class Adapter
     }
 
     /**
-     * Update an item based on search fields.
+     * Updates an item based on search fields.
      * @param string $collection
-     * @param array| $search
+     * @param array|object $search
      * @param array $update
      */
     public function update($collection, $search, $update)
@@ -204,6 +204,22 @@ class Adapter
         );
 
         $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
+    }
+
+    /**
+     * Deletes an item from the collection bases on the $search fields.
+     * @param $collection
+     * @param $search
+     */
+    public function delete($collection, $search)
+    {
+        $this->checkDB();
+
+        $search = $this->objToCleanArray($search);
+
+        $bulk = new BulkWrite();
+
+        $bulk->delete($search);
     }
 
     /**
@@ -270,7 +286,7 @@ class Adapter
                     $obj[$param] = $value;
             }
 
-            unlink($tmp);
+            unset($tmp);
         }
 
         return $obj;
