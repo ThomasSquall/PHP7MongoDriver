@@ -220,6 +220,7 @@ class Adapter
         $bulk = new BulkWrite();
 
         $bulk->delete($search);
+        $this->db->executeBulkWrite("$this->dbName.$collection", $bulk);
     }
 
     /**
